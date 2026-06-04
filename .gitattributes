@@ -1,0 +1,2 @@
+# Track model weights with Git LFS (install: https://git-lfs.com)
+*.pth filter=lfs diff=lfs merge=lfs -text

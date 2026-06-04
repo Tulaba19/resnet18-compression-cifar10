@@ -1,0 +1,55 @@
+# ============================================================
+# Configuration for the ResNet-18 / CIFAR-10 compression benchmark.
+# Edit the values below and run:  python run.py --config config.yaml
+# Set "enabled: false" on any stage you want to skip.
+# ============================================================
+
+device: auto # auto | cuda | cpu
+data_dir: ./data # CIFAR-10 is downloaded here automatically
+models_dir: ./models # trained + compressed models are saved here
+output_dir: ./outputs # results.csv, history.json and plots go here
+pause_between_stages: false # true = wait for Enter between stages (let the machine cool down)
+
+model:
+  num_classes: 10
+
+# --- Stage 1: train the FP32 baseline ---
+train:
+  enabled: true
+  epochs: 25
+  batch_size: 128
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 0.0005
+  nesterov: true
+  num_workers: 2 # set to 0 on Windows if you hit worker errors
+
+# --- Stage 2: post-training INT8 quantization (no retraining) ---
+quantization_ptq:
+  enabled: true
+  backend: fbgemm # fbgemm = x86/Intel/AMD; use qnnpack for ARM
+  calib_batches: 10 # 10 x 32 = 320 calibration images
+  calib_batch_size: 32
+
+# --- Stage 3: quantization-aware training INT8 ---
+quantization_qat:
+  enabled: true
+  backend: fbgemm
+  epochs: 10
+  lr: 0.001
+  batch_size: 128
+  num_workers: 2
+
+# --- Stage 4: structured (channel) pruning ---
+pruning_structured:
+  enabled: true
+  ratios: [0.10, 0.30, 0.50, 0.70, 0.90] # fraction of channels removed
+  finetune_epochs: 6
+  lr: 0.001
+  batch_size: 128
+  num_workers: 2
+
+# --- Evaluation (applies to every model produced) ---
+evaluate:
+  warmup_runs: 30
+  timing_runs: 1000

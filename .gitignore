@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+data/
+outputs/
+.venv/
+# Note: models/ is intentionally NOT ignored — released models live there (via Git LFS).

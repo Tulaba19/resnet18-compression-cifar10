@@ -1,0 +1,9 @@
+name,accuracy_pct,latency_cpu_mean_ms,latency_cpu_std_ms,latency_cpu_median_ms,size_disk_mb,total_params_m,peak_gpu_memory_mb
+baseline_fp32,94.42,14.123,1.023,14.091,42.701,11.174,61.127
+structured_pruning_30,93.61,5.067,0.564,4.967,20.901,5.4599,30.024
+structured_pruning_50,92.71,3.156,0.376,3.052,10.741,2.7976,19.851
+structured_pruning_70,90.67,1.643,0.254,1.546,3.863,0.9973,12.996
+structured_pruning_90,73.35,0.95,0.199,0.861,0.472,0.1104,9.609
+structured_pruning_10,94.19,6.82,0.734,6.737,34.483,9.0184,43.602
+PTQ_int8,94.42,2.345,0.55,2.234,10.794,0.0,--
+QAT_int8,94.41,2.334,0.492,2.242,10.794,0.0,--
