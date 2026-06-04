@@ -16,7 +16,7 @@ model:
 # --- Stage 1: train the FP32 baseline ---
 train:
   enabled: true
-  epochs: 25
+  epochs: 50
   batch_size: 128
   lr: 0.1
   momentum: 0.9
@@ -44,7 +44,7 @@ quantization_qat:
 pruning_structured:
   enabled: true
   ratios: [0.10, 0.30, 0.50, 0.70, 0.90] # fraction of channels removed
-  finetune_epochs: 6
+  finetune_epochs: 10
   lr: 0.001
   batch_size: 128
   num_workers: 2
