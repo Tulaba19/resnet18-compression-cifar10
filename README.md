@@ -20,7 +20,7 @@ without editing any code.
 
 ## 1. Setup
 
-Requires Python 3.10+. A CUDA GPU is recommended for training (an 8 GB card is
+Requires Python Python 3.11. A CUDA GPU is recommended for training (an 8 GB card is
 plenty); everything also runs on CPU, just slower.
 
 ```bash
